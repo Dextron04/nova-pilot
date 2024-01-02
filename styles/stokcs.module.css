@@ -1,0 +1,26 @@
+/* https://colorhunt.co/palette/001c30176b8764ccc5dafffb */
+
+.bg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+}
+
+.chart {
+    display: flex;
+    justify-content: center;
+    width: 800px;
+    /* Or any other value */
+    height: 600px;
+}
+
+/* Mobile View */
+@media (max-width: 768px) {
+    .chart {
+        width: 100%;
+        height: auto;
+    }
+}

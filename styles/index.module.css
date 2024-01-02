@@ -1,0 +1,19 @@
+.heading {}
+
+.bg {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+/* https://colorhunt.co/palette/001c30176b8764ccc5dafffb */
+
+@media (max-width: 768px) {
+    .chart {
+        width: 100%;
+        height: auto;
+    }
+}

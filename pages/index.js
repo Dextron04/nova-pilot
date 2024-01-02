@@ -1,10 +1,13 @@
 import React from 'react';
+import styles from '../styles/index.module.css'
+import Link from 'next/link';
 
-function Home() {
+const Home = () => {
     return (
-        <div>
-            <h1>Welcome to the Home Page!</h1>
-            <p>This is the content of the home page.</p>
+        <div className={styles.bg}>
+            <h1 className={styles.heading}>Welcome to Nova Pilot 🚀</h1>
+            <p>Launch your journey in stocks</p>
+            <Link href="/stocks">Stocks</Link>
         </div>
     );
 }
