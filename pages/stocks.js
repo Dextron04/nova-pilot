@@ -1,6 +1,7 @@
 import { useState, useEffect, React } from "react";
 import styles from '../styles/stokcs.module.css';
 import Charts from "../components/Charts";
+import { fetchData } from "../api/api";
 
 
 
@@ -14,77 +15,37 @@ const Stocks = () => {
 
 
     useEffect(() => {
-        const fetchData = async () => {
+        const getData = async () => {
             const endDate = new Date();
             let startDate = new Date();
             let newTimeSpan;
             let multiplier;
 
-            // console.log(startDate.setMonth(endDate.getMonth() - 1));
+            const data = await fetchData(symbol, multiplier, newTimeSpan, startDate, endDate, timeRange);
 
-            switch (timeRange) {
-                case "day":
-                    multiplier = 20;
-                    newTimeSpan = "minute"
-                    startDate.setDate(endDate.getDate() - 1);
-                    break;
-                case "month":
-                    multiplier = 1;
-                    newTimeSpan = "day"
-                    startDate.setMonth(endDate.getMonth() - 1);
-                    // console.log(startDate.toISOString().split("T")[0]);
-                    // console.log(endDate.toISOString().split("T")[0]);
-                    // console.log(timeSpan);
-                    break;
-                case "year":
-                    multiplier = 1;
-                    newTimeSpan = "month"
-                    startDate.setFullYear(endDate.getFullYear() - 1);
-                    break;
-                case "all":
-                    multiplier = 3;
-                    newTimeSpan = "month"
-                    startDate = new Date("0");
-                    break;
-            }
+            setData(data);
 
-            // setTimeSpan(newTimeSpan);
+            if (data?.results) {
+                let labels = "";
 
-            let url = `https://api.polygon.io/v2/aggs/ticker/${symbol}/range/${multiplier}/${newTimeSpan}/${startDate.toISOString().split("T")[0]}/${endDate.toISOString().split("T")[0]}?adjusted=true&sort=asc&limit=120&apiKey=${process.env.NEXT_PUBLIC_POLYGON_API_KEY}`;
-
-            const response = await fetch(url);
-            const data = await response.json();
-
-            if (response.status == 200) {
-                console.log("Success");
-                setData(data);
-
-                if (data?.results) {
-                    let labels = data.results.map(item => new Date(item.t).toLocaleDateString());
-
-                    if (newTimeSpan == "minute") {
-                        labels = data.results.map(item => new Date(item.t).toLocaleTimeString());
-                    } else {
-                        labels = data.results.map(item => new Date(item.t).toLocaleDateString());
-                    }
-
-
-                    const openData = data.results.map(item => item.o);
-                    const closeData = data.results.map(item => item.c);
-                    const highData = data.results.map(item => item.h);
-                    const lowData = data.results.map(item => item.l);
-                    const ticker = data.ticker;
-
-                    setChartData({ labels, openData, closeData, highData, lowData, ticker });
+                if (newTimeSpan == "minute") {
+                    labels = data.results.map(item => new Date(item.t).toLocaleTimeString());
+                } else {
+                    labels = data.results.map(item => new Date(item.t).toLocaleDateString());
                 }
-            } else if (response.status == 400) {
-                console.warn("Empty Ticker");
-            } else {
-                console.log("Error");
+
+
+                const openData = data.results.map(item => item.o);
+                const closeData = data.results.map(item => item.c);
+                const highData = data.results.map(item => item.h);
+                const lowData = data.results.map(item => item.l);
+                const ticker = data.ticker;
+
+                setChartData({ labels, openData, closeData, highData, lowData, ticker });
             }
         }
 
-        fetchData();
+        getData();
     }, [symbol, timeRange]);
 
     // using the event handler to get the value of the input values.

@@ -10,6 +10,7 @@ import {
     Tooltip,
     Legend,
 } from 'chart.js';
+import styles from '../styles/cards.module.css'
 
 const Charts = ({ data }) => {
 
@@ -30,7 +31,8 @@ const Charts = ({ data }) => {
             {
                 label: 'Close',
                 data: data.closeData,
-                borderColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: '#36A2EB',
+                backgroundColor: '#9BD0F5'
             },
             {
                 label: 'High',
@@ -70,7 +72,23 @@ const Charts = ({ data }) => {
 
 
     return (
-        <Line data={chartData} options={options} />
+        <div className={styles.card}>
+            <div className={styles.tools}>
+                <div className={styles.circle}>
+                    <span className={`${styles.red} ${styles.box}`}></span>
+                </div>
+                <div className={styles.circle}>
+                    <span className={`${styles.yellow} ${styles.box}`}></span>
+                </div>
+                <div className={styles.circle}>
+                    <span className={`${styles.green} ${styles.box}`}></span>
+                </div>
+            </div>
+            <div className={styles.card__content}>
+                <Line data={chartData} options={options} />
+            </div>
+        </div>
+
     )
 }
 

@@ -14,8 +14,10 @@
     justify-content: center;
     width: 800px;
     /* Or any other value */
-    height: 600px;
+    height: 425px;
+    border-radius: 20px;
 }
+
 
 /* Mobile View */
 @media (max-width: 768px) {
