@@ -1,6 +1,9 @@
 
 // Fetch stocks data
-export const fetchData = async (symbol, multiplier, newTimeSpan, startDate, endDate, timeRange) => {
+export const fetchData = async (symbol, startDate, endDate, timeRange) => {
+
+    let newTimeSpan;
+    let multiplier;
 
     switch (timeRange) {
         case "day":

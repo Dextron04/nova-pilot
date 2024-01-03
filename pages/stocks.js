@@ -18,17 +18,16 @@ const Stocks = () => {
         const getData = async () => {
             const endDate = new Date();
             let startDate = new Date();
-            let newTimeSpan;
-            let multiplier;
 
-            const data = await fetchData(symbol, multiplier, newTimeSpan, startDate, endDate, timeRange);
+
+            const data = await fetchData(symbol, startDate, endDate, timeRange);
 
             setData(data);
 
             if (data?.results) {
                 let labels = "";
 
-                if (newTimeSpan == "minute") {
+                if (timeRange == "day") {
                     labels = data.results.map(item => new Date(item.t).toLocaleTimeString());
                 } else {
                     labels = data.results.map(item => new Date(item.t).toLocaleDateString());

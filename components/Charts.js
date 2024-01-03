@@ -26,24 +26,25 @@ const Charts = ({ data }) => {
             {
                 label: 'Open',
                 data: data.openData,
-                borderColor: 'rgba(255, 99, 132, 0.2)',
-            },
-            {
-                label: 'Close',
-                data: data.closeData,
                 borderColor: '#36A2EB',
                 backgroundColor: '#9BD0F5'
             },
-            {
-                label: 'High',
-                data: data.highData,
-                borderColor: 'rgba(153, 102, 255, 0.2)',
-            },
-            {
-                label: 'Low',
-                data: data.lowData,
-                borderColor: 'rgba(255, 159, 64, 0.2)',
-            },
+            // {
+            //     label: 'Close',
+            //     data: data.closeData,
+            //     borderColor: '#36A2EB',
+            //     backgroundColor: '#9BD0F5'
+            // },
+            // {
+            //     label: 'High',
+            //     data: data.highData,
+            //     borderColor: 'rgba(153, 102, 255, 0.2)',
+            // },
+            // {
+            //     label: 'Low',
+            //     data: data.lowData,
+            //     borderColor: 'rgba(255, 159, 64, 0.2)',
+            // },
         ],
     };
 
@@ -61,7 +62,10 @@ const Charts = ({ data }) => {
         responsive: true,
         plugins: {
             legend: {
-                position: 'top',
+                display: 'false',
+                // position: 'top',
+                // maxHeight: '10px',
+                // maxWidth: '10px',
             },
             title: {
                 display: true,
