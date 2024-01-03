@@ -57,15 +57,15 @@ const Stocks = () => {
     return (
         <div className={styles.bg}>
             <h1 className={styles.heading}>Stocks</h1>
-            <form onSubmit={handleSubmit}>
-                <input type="text" name="symbol" />
-                <select value={timeRange} onChange={e => setTimeRange(e.target.value)}>
+            <form className={styles.form} onSubmit={handleSubmit}>
+                <input placeholder="Searth the internet..." type="text" name="symbol" className={styles.input} />
+                <select value={timeRange} className={styles.input} onChange={e => setTimeRange(e.target.value)}>
                     <option value="day">Day</option>
                     <option value="month">Month</option>
                     <option value="year">Year</option>
                     <option value="all">All Time</option>
                 </select>
-                <button type="submit">Submit</button>
+                <button type="submit" className={styles.input}>Submit</button>
             </form>
             <div className={styles.chart}>
                 {data && <Charts data={chartData} />}
